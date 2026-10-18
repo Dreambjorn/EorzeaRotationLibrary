@@ -121,7 +121,7 @@ function renderHome() {
       if (!group.length) return '';
       return `<section class="job-group role-${role}"><h2>${name}<small>${group.length}</small></h2><div class="job-list">${group.map(job => `<a href="#/job/${job.id}" class="job-index-row">${jobIcon(job)}<span class="job-row-name">${job.name}</span><span class="job-row-level">Lv. 1–${job.cap}</span><span class="row-open" aria-hidden="true">›</span></a>`).join('')}</div></section>`;
     }).join('') || '<div class="empty-state">No jobs match your search.</div>'}</div>
-    <footer class="page-footer"><span>${library.jobs.reduce((count, job) => count + (job.actions?.length || 0), 0)} actions · 23 jobs · PvE</span><span>FFXIV © SQUARE ENIX · Guides credited to their authors</span></footer>`;
+    <footer class="page-footer"><span>${library.jobs.reduce((count, job) => count + (job.actions?.length || 0), 0)} actions · 23 jobs · PvE</span><div class="footer-links"><span>FFXIV © SQUARE ENIX</span><button type="button" data-credits>Credits</button></div></footer>`;
 }
 
 function actionButton(action, count = 1, note = '', index = '', flowId = '', priority = '', completed = false, start = false, example = false, gcd = false, slot = '') {
@@ -300,7 +300,7 @@ function renderDetail() {
     ${activeJob.referenceNeedsReview ? '<div class="notice warning-notice">The source guide changed. This job’s rotation rules need review; check the updated guide before relying on the priorities below.</div>' : ''}
     <div class="detail-tabs" role="tablist" aria-label="Job information">${[['rotations', 'Rotations'], ['actions', 'Action library'], ['sources', 'Sources & updates']].map(([id, name]) => `<button role="tab" id="tab-${id}" data-tab="${id}" aria-controls="job-content" aria-selected="${tab === id}">${name}${id === 'actions' ? ` <span>${currentView.actions.length}</span>` : ''}</button>`).join('')}<span class="detail-freshness">${activeJob.checkedAt ? 'Checked ' + date(activeJob.checkedAt) : 'Awaiting first update'}</span></div>
     <section id="job-content" role="tabpanel" aria-labelledby="tab-${tab}">${tab === 'rotations' ? rotationContent() : tab === 'actions' ? actionContent() : sourcesContent()}</section>
-    <footer class="page-footer"><span>Click any action for details</span><span>Conditions describe the situation you select</span></footer>`;
+    <footer class="page-footer"><div class="footer-hints"><span>Click any action for details</span><span>Conditions describe the situation you select</span></div><div class="footer-links"><span>FFXIV © SQUARE ENIX</span><button type="button" data-credits>Credits</button></div></footer>`;
 }
 
 function rotationContent() {
@@ -416,6 +416,7 @@ $('#sync').addEventListener('click', async () => {
   } catch (error) { notify(error.message); }
 });
 document.addEventListener('click', event => {
+  if (event.target.closest('[data-credits]')) { $('#credits-dialog').showModal(); return; }
   const review = event.target.closest('[data-review-job]');
   if (review) {
     const id = review.dataset.reviewJob;

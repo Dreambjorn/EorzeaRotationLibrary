@@ -3,3 +3,4 @@ node_modules/
 dist/
 Eorzea Rotation Library Data/
 *.log
+*.exe

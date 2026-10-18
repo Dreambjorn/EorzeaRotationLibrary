@@ -2,6 +2,7 @@
   "name": "eorzea-rotation-library",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "A local, source-aware rotation library for all 23 FFXIV combat jobs.",
   "engines": {
@@ -15,6 +16,6 @@
   "main": "desktop/main.mjs",
   "devDependencies": {
     "electron": "44.9.0",
-    "electron-builder": "26.15.3"
+    "electron-builder": "^26.5.0"
   }
 }

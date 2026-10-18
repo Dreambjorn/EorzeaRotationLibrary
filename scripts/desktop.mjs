@@ -34,6 +34,8 @@ if (process.argv.includes('--start')) {
   const config = (await import('../electron-builder.config.cjs')).default;
   const outputs = await build({ targets: Platform.WINDOWS.createTarget('portable', Arch.x64),
     config: { ...config, electronDist: electron, publish: null } });
+  const executable = outputs.find(output => output.endsWith('.exe'));
+  if (!executable) throw new Error('No portable EXE was produced.');
   await mkdir(path.join(root, 'dist'), { recursive: true });
   for (const output of outputs) {
     if (!output.endsWith('.exe')) continue;
@@ -41,4 +43,6 @@ if (process.argv.includes('--start')) {
     await copyFile(output, path.join(root, 'dist', filename));
     console.log(`Created dist/${filename}`);
   }
+  await copyFile(executable, path.join(root, 'EorzeaRotationLibrary.exe'));
+  console.log('Created EorzeaRotationLibrary.exe');
 }

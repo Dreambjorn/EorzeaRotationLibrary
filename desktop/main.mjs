@@ -1,4 +1,5 @@
 import { app, BrowserWindow, dialog, Menu, net, protocol, screen, session, shell } from 'electron';
+import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -52,7 +53,7 @@ function external(url) {
   try {
     const value = new URL(url);
     return value.protocol === 'https:' && !value.username && !value.password &&
-      ['na.finalfantasyxiv.com', 'www.thebalanceffxiv.com', 'www.icy-veins.com', 'v2.xivapi.com'].includes(value.hostname);
+      ['na.finalfantasyxiv.com', 'www.thebalanceffxiv.com', 'www.icy-veins.com', 'v2.xivapi.com', 'game-icons.net', 'creativecommons.org'].includes(value.hostname);
   } catch { return false; }
 }
 
@@ -85,13 +86,20 @@ async function open() {
   window = new BrowserWindow({
     ...(valid ? bounds : { width: 1280, height: 900 }), minWidth: 640, minHeight: 480,
     show: false, title: 'Eorzea Rotation Library', backgroundColor: '#1b1d1f',
-    icon: path.join(root, 'public/aetheryte-crystal.ico'),
+    icon: path.join(root, 'public/crystal.png'),
     webPreferences: { sandbox: true, contextIsolation: true, nodeIntegration: false, spellcheck: false, backgroundThrottling: false },
   });
-  if (process.platform === 'win32' && process.env.PORTABLE_EXECUTABLE_FILE) window.setAppDetails({
-    appId: 'Eorzea.RotationLibrary.Portable', appIconPath: process.env.PORTABLE_EXECUTABLE_FILE,
-    relaunchCommand: `"${process.env.PORTABLE_EXECUTABLE_FILE}"`, relaunchDisplayName: 'Eorzea Rotation Library',
-  });
+  if (process.platform === 'win32' && process.env.PORTABLE_EXECUTABLE_FILE) {
+    const icon = readFileSync(path.join(root, 'public/crystal.ico'));
+    const iconHash = createHash('sha256').update(icon).digest('hex').slice(0, 16);
+    // A new resource path keeps Windows from reusing an outdated taskbar icon.
+    const iconPath = path.join(directory, 'profile', `app-icon-${iconHash}.ico`);
+    writeFileSync(iconPath, icon);
+    window.setAppDetails({
+      appId: 'Eorzea.RotationLibrary.Portable', appIconPath: iconPath, appIconIndex: 0,
+      relaunchCommand: `"${process.env.PORTABLE_EXECUTABLE_FILE}"`, relaunchDisplayName: 'Eorzea Rotation Library',
+    });
+  }
   Menu.setApplicationMenu(null);
   window.webContents.setWindowOpenHandler(({ url }) => {
     if (external(url)) shell.openExternal(url).catch(() => {});
