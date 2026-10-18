@@ -1,0 +1,20 @@
+{
+  "name": "eorzea-rotation-library",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A local, source-aware rotation library for all 23 FFXIV combat jobs.",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node scripts/desktop.mjs --start",
+    "build": "node scripts/desktop.mjs",
+    "check": "node --check server.mjs && node --check desktop/main.mjs && node --check desktop/browser.mjs && node --check lib/browser.mjs && node --check lib/sources.mjs && node --check public/app.js && node --check scripts/desktop.mjs"
+  },
+  "main": "desktop/main.mjs",
+  "devDependencies": {
+    "electron": "44.9.0",
+    "electron-builder": "26.15.3"
+  }
+}

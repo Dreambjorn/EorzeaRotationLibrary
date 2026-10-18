@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#25282b">
+  <meta name="description" content="An interactive local library of FFXIV rotations, skills, and current job guides.">
+  <title>Eorzea Rotation Library</title>
+  <link rel="icon" href="/aetheryte-crystal.png?v=2" type="image/png" sizes="512x512">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#/" aria-label="Eorzea Rotation Library home">
+      <img class="brand-mark" src="/aetheryte-crystal.png" width="28" height="28" alt="" aria-hidden="true">
+      <span>Eorzea Rotation Library</span>
+    </a>
+    <div class="topbar-right"><label class="zoom-setting" for="ui-scale">Size <select id="ui-scale"><option value="1">100%</option><option value="1.1">110%</option><option value="1.25" selected>125%</option><option value="1.5">150%</option></select></label><button id="rotation-updates" type="button" hidden>Rotation updates</button><button id="sync" class="sync-button" type="button"><span aria-hidden="true">↻</span> Check for updates</button></div>
+  </header>
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Job navigation">
+      <a class="library-link" href="#/">Job index <span class="job-count">23</span></a>
+      <label class="search-label" for="search">Find a job</label>
+      <div class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" type="search" autocomplete="off" placeholder="Name or abbreviation…"></div>
+      <nav id="job-nav" aria-label="Jobs by role"></nav>
+      <div class="sidebar-footer"><span class="connection-dot"></span><span id="update-status" role="status">Reading local library…</span></div>
+    </aside>
+    <main id="main" tabindex="-1"><div class="loading"><span class="loader"></span><h1>Opening your library</h1><p>Loading local job data and current guides.</p></div></main>
+  </div>
+  <dialog id="updates-dialog" aria-labelledby="updates-title"><button class="dialog-close" type="button" aria-label="Close rotation updates">×</button><h2 id="updates-title">Rotation guides changed</h2><p>These publishers changed their rotation guidance. Compare the previous and current content below. Dates and page rendering alone do not trigger this notice. The library’s action order still needs a manual review.</p><div id="updates-list"></div><p class="update-notice-note">Closing this notice acknowledges the notification. It does not mark the rotation rules as reviewed. Find it again with Rotation updates.</p><button class="dialog-close updates-dismiss" type="button">Got it</button></dialog>
+  <dialog id="action-dialog" aria-labelledby="action-title"><button class="dialog-close" type="button" aria-label="Close action details">×</button><div id="action-content"></div></dialog>
+  <dialog id="diagram-dialog" aria-label="Published rotation diagram"><button class="dialog-close" type="button" aria-label="Close diagram">×</button><img id="diagram-image" alt=""></dialog>
+  <dialog id="rotation-overview" class="rotation-overview" aria-labelledby="overview-title"><header class="overview-heading"><div><h2 id="overview-title">Your rotation</h2><p>Read numbered priorities left to right, then return left. Blue GCD examples show attacks between weaves; continue your current combo or phase. Skip Already done icons. Click actions for details.</p></div><div class="overview-controls"><label for="overview-size">Size <select id="overview-size" aria-describedby="overview-fit"><option value="1">100%</option><option value="1.1">110%</option><option value="1.25" selected>125%</option><option value="1.5">150%</option><option value="1.75">175%</option><option value="2">200%</option></select></label><details id="overview-conditions" class="overview-conditions"><summary>Conditions</summary><div id="overview-condition-content" class="overview-condition-panel"></div></details><output id="overview-fit" aria-live="polite"></output><button class="dialog-close overview-close" aria-label="Back to guide">Back to guide ×</button></div></header><div id="overview-viewport" class="overview-viewport"><ol id="overview-list" class="priority-list overview-list"></ol></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

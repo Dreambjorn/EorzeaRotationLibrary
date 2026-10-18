@@ -1,0 +1,5 @@
+node_modules/
+.build-cache/
+dist/
+Eorzea Rotation Library Data/
+*.log
