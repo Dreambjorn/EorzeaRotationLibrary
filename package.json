@@ -17,5 +17,10 @@
   "devDependencies": {
     "electron": "44.9.0",
     "electron-builder": "^26.5.0"
+  },
+  "overrides": {
+    "app-builder-lib": {
+      "@electron/get": "^5.1.0"
+    }
   }
 }
