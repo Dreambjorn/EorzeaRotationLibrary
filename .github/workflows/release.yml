@@ -160,9 +160,7 @@ jobs:
               report.stats.malicious + report.stats.suspicious + report.stats.undetected + report.stats.harmless === 0) {
             throw new Error('The VirusTotal report has invalid engine results or analysis time.');
           }
-          const rows = categories.map(key => '| ' + key + ' | ' + report.stats[key] + ' |').join('\n');
-          console.log('\n## VirusTotal\n\n[View scan report](' + report.url + ')\n\nAnalyzed: ' + report.analyzedAt +
-            '\n\n| Result | Engines |\n| --- | ---: |\n' + rows);
+          console.log('\n## VirusTotal\n\n[View scan report](' + report.url + ')');
           JS
           notes_file="$RUNNER_TEMP/release-notes.md"
           gh api --method POST "repos/$GH_REPO/releases/generate-notes" \
