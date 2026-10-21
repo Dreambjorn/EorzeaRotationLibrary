@@ -46,9 +46,12 @@ export async function scanRelease(filename, expectedHash, { apiKey = process.env
     const result = await request(api + '/files/upload_url');
     let url;
     try { url = new URL(result.data); } catch { throw new Error('VirusTotal returned an invalid upload URL.'); }
-    if (url.protocol !== 'https:' || url.hostname !== 'www.virustotal.com' || url.port || url.username || url.password || !url.pathname.startsWith('/_ah/upload/')) {
-      throw new Error('VirusTotal returned an unexpected upload destination.');
+    const trustedHost = url.hostname === 'virustotal.com' || url.hostname.endsWith('.virustotal.com');
+    if (!['http:', 'https:'].includes(url.protocol) || !trustedHost || url.port || url.username || url.password) {
+      throw new Error('VirusTotal returned an unexpected upload origin: ' + url.origin + '.');
     }
+    // Upload hosts and paths come from the API; signed tokens must stay intact.
+    url.protocol = 'https:';
     upload = url.href;
   }
   const form = new FormData();

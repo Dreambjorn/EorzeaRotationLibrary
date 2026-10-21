@@ -4,36 +4,39 @@ A portable Windows app for FFXIV rotations, with all 23 combat jobs in one place
 
 ## Using the app
 
-1. Download `EorzeaRotationLibrary.exe` from **Releases**.
-2. Put it in a folder where you can save files, then double-click it. There's nothing to install.
-3. Choose your job, level, and encounter type. Use **Full view** to see the whole rotation.
+1. Download `EorzeaRotationLibrary.exe` from [Releases](https://github.com/Dreambjorn/EorzeaRotationLibrary/releases/latest).
+2. Save it in a writable folder and double-click it. No installation needed.
+3. Select your job, level, and encounter. Adjust **Your conditions** or open **Full view**.
 
-The first launch needs internet to download game icons, job data, and guides. These downloads are saved locally and aren't included in the repo or EXE. The app icon is bundled.
-
-Settings and downloads live in `Eorzea Rotation Library Data`, next to the EXE. If you move the app, take that folder too. If you're sending the app to someone else, send just the EXE.
-
-The app starts at **125% zoom** and remembers your changes.
-
-For enemy packs, select the actual enemy count in **Your conditions**. Independent cooldown controls let you use shorter timers without selecting the entire damage window. Numbered reference links and the separate rotation-review date appear beneath the rotation and in Full view. Hover over a reference link to see its source.
-
-Blue Mage and Beastmaster show introductory setups. Full learned-spell loadouts and familiar-specific rotations require their original guides.
+- First launch needs internet for game data, icons, and guides.
+- Settings and downloads live in `Eorzea Rotation Library Data`. Move that folder with the app.
+- Blue Mage and Beastmaster include introductory setups only.
 
 ## Building from source
 
-You'll need Windows and Node.js 24 or newer. Open a terminal in this folder and run:
+Requires Windows and Node.js 24 or newer. Run from this folder:
 
 ```powershell
 npm ci
 npm run build
 ```
 
-This creates `EorzeaRotationLibrary.exe` in this folder, replacing the previous build. A versioned copy is also saved in `dist/`.
+Builds appear in this folder, with a versioned copy in `dist/`.
 
-To run from source, use `npm start`. Use `npm run check` to check every JavaScript module and `npm test` to run the synthetic regression suite. Tests use your configured temporary directory.
+- Run locally: `npm start`.
+- Check syntax: `npm run check`.
+- Run regression tests: `npm test`.
 
-To validate every job and level against an existing downloaded library without changing it, run:
+<details>
+<summary>Optional: validate downloaded rotations</summary>
 
-    npm run validate:rotations -- "Eorzea Rotation Library Data/library.json"
+Checks every job and level without changing the downloaded library:
+
+```powershell
+npm run validate:rotations -- "Eorzea Rotation Library Data/library.json"
+```
+
+</details>
 
 ## Creating a release
 
@@ -49,4 +52,4 @@ App icon: [Crystal shine](https://game-icons.net/1x1/lorc/crystal-shine.html) by
 
 ## Disclaimer
 
-Guide content, downloaded action data, and job/action icons are not included in this repository or the EXE. The app downloads and caches them locally. Only the app icon is bundled.
+Guide content, game data, and job/action icons are downloaded and cached locally, and excluded from the repository and app bundle. Only the app icon is bundled.
