@@ -14,6 +14,10 @@ Settings and downloads live in `Eorzea Rotation Library Data`, next to the EXE. 
 
 The app starts at **125% zoom** and remembers your changes.
 
+For enemy packs, select the actual enemy count in **Your conditions**. Independent cooldown controls let you use shorter timers without selecting the entire damage window. Numbered reference links and the separate rotation-review date appear beneath the rotation and in Full view. Hover over a reference link to see its source.
+
+Blue Mage and Beastmaster show introductory setups. Full learned-spell loadouts and familiar-specific rotations require their original guides.
+
 ## Building from source
 
 You'll need Windows and Node.js 24 or newer. Open a terminal in this folder and run:
@@ -25,7 +29,11 @@ npm run build
 
 This creates `EorzeaRotationLibrary.exe` in this folder, replacing the previous build. A versioned copy is also saved in `dist/`.
 
-To run from source, use `npm start`. Use `npm run check` to check JavaScript syntax.
+To run from source, use `npm start`. Use `npm run check` to check every JavaScript module and `npm test` to run the synthetic regression suite. Tests use your configured temporary directory.
+
+To validate every job and level against an existing downloaded library without changing it, run:
+
+    npm run validate:rotations -- "Eorzea Rotation Library Data/library.json"
 
 ## Creating a release
 

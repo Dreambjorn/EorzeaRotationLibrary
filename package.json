@@ -1,6 +1,6 @@
 {
   "name": "eorzea-rotation-library",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "license": "MIT",
   "type": "module",
@@ -11,7 +11,9 @@
   "scripts": {
     "start": "node scripts/desktop.mjs --start",
     "build": "node scripts/desktop.mjs",
-    "check": "node --check server.mjs && node --check desktop/main.mjs && node --check desktop/browser.mjs && node --check lib/browser.mjs && node --check lib/sources.mjs && node --check public/app.js && node --check scripts/desktop.mjs"
+    "check": "node scripts/check.mjs",
+    "test": "node --test",
+    "validate:rotations": "node scripts/validate-rotations.mjs"
   },
   "main": "desktop/main.mjs",
   "devDependencies": {

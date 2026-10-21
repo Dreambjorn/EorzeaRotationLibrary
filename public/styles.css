@@ -72,6 +72,7 @@ select:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
 .rotation-notes { margin: 16px 0; border-left: 2px solid #9b885f; padding-left: 12px; color: #c9c2b1; font-size: 12px; }
 .rotation-notes p { margin: 6px 0; }
 .rotation-credit { color: var(--dim); font-size: 11px; margin-top: 14px; }
+.rotation-credit p { margin: 4px 0; }
 .supporting-guides { border-top: 1px solid var(--line); margin-top: 25px; padding-top: 12px; }
 .supporting-guides > summary { cursor: pointer; font-size: 14px; font-weight: 500; }
 .supporting-guides > summary > small { color: var(--dim); font-size: 11px; font-weight: 400; margin-left: 12px; }
