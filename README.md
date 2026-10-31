@@ -14,7 +14,7 @@ A portable Windows app for FFXIV rotations, with all 23 combat jobs in one place
 
 ## Building from source
 
-Requires Windows and Node.js 24 or newer. Run from this folder:
+Requires Windows and Node.js 24.22.2 or newer within the 24.x release line. Run from this folder:
 
 ```powershell
 npm ci
