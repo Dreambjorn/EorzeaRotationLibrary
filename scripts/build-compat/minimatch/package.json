@@ -1,0 +1,10 @@
+{
+  "name": "minimatch",
+  "version": "11.0.2+compat.1",
+  "private": true,
+  "type": "commonjs",
+  "main": "index.cjs",
+  "dependencies": {
+    "minimatch-modern": "npm:minimatch@11.0.2"
+  }
+}

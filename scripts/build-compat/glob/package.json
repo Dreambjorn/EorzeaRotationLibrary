@@ -1,0 +1,10 @@
+{
+  "name": "glob",
+  "version": "14.0.3+compat.1",
+  "private": true,
+  "type": "commonjs",
+  "main": "index.cjs",
+  "dependencies": {
+    "glob-modern": "npm:glob@14.0.3"
+  }
+}

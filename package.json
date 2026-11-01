@@ -23,6 +23,18 @@
   "overrides": {
     "app-builder-lib": {
       "@electron/get": "^5.1.0"
+    },
+    "fast-uri": "3.1.9",
+    "minimatch": "11.0.2",
+    "@electron/asar": {
+      "glob": "file:../../../scripts/build-compat/glob",
+      "minimatch": "file:../../../scripts/build-compat/minimatch"
+    },
+    "dir-compare": {
+      "minimatch": "file:../../scripts/build-compat/minimatch"
+    },
+    "rimraf": {
+      "glob": "file:../../scripts/build-compat/glob"
     }
   }
 }
